@@ -1,0 +1,26 @@
+{
+    "name": "wrasse",
+    "description": "Marlin Job Cleaner",
+    "version": "1.0.0",
+    "author": "Joyent (joyent.com)",
+    "private": true,
+    "dependencies": {
+        "assert-plus": "0.1.2",
+        "bunyan": "0.18.2",
+        "dashdash": "1.0.1",
+        "libmanta": "git+ssh://git@git.joyent.com:node-libmanta.git#5352ece",
+        "manta": "git+ssh://git@github.com:joyent/node-manta.git#master",
+        "marlin": "git+ssh://git@git.joyent.com:marlin.git#master",
+        "memorystream-mcavage": "0.1.0",
+        "once": "1.1.1",
+        "posix-getopt": "1.0.0",
+        "node-uuid": "1.4.0",
+        "vasync": "1.3.3"
+    },
+    "devDependencies": {
+        "nodeunit": "0.7.4"
+    },
+    "scripts": {
+        "test": "nodeunit test/*.test.js"
+    }
+}
