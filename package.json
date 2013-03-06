@@ -6,9 +6,9 @@
     "private": true,
     "dependencies": {
         "assert-plus": "0.1.2",
-        "bunyan": "0.18.2",
+        "bunyan": "0.18.3",
         "dashdash": "1.0.1",
-        "libmanta": "git+ssh://git@git.joyent.com:node-libmanta.git#5352ece",
+        "libmanta": "git+ssh://git@git.joyent.com:node-libmanta.git#master",
         "manta": "git+ssh://git@github.com:joyent/node-manta.git#master",
         "marlin": "git+ssh://git@git.joyent.com:marlin.git#master",
         "memorystream-mcavage": "0.1.0",
