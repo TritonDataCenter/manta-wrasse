@@ -8,7 +8,7 @@
     },
     "logLevel": "info",
     "manta": {
-        "url": "https://10.2.121.3",
+        "url": "https://manta.bh1.joyent.us",
         "user": "mcavage",
         "keyId": "7b:c0:5c:d6:9e:11:0c:76:04:4b:03:c9:11:f2:72:7f",
         "key": "/home/mcavage/.ssh/id_rsa"

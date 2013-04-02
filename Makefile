@@ -31,7 +31,7 @@ JSSTYLE_FLAGS    = -f tools/jsstyle.conf
 SMF_MANIFESTS_IN = smf/manifests/wrasse.xml.in
 
 NAME=wrasse
-NODE_PREBUILT_VERSION=v0.8.21
+NODE_PREBUILT_VERSION=v0.8.22
 NODE_PREBUILT_TAG=zone
 
 
