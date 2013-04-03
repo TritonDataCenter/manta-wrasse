@@ -11,6 +11,7 @@
         "libmanta": "git+ssh://git@git.joyent.com:node-libmanta.git#master",
         "manta": "git+ssh://git@github.com:joyent/node-manta.git#MANTA-933",
         "marlin": "git+ssh://git@git.joyent.com:marlin.git#master",
+        "moray": "git+ssh://git@git.joyent.com:node-moray.git#master",
         "readable-stream": "1.0.2",
         "once": "1.1.1",
         "posix-getopt": "1.0.0",

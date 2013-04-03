@@ -9,6 +9,7 @@ var dashdash = require('dashdash');
 var libmanta = require('libmanta');
 var manta = require('manta');
 var marlin = require('marlin');
+var moray = require('moray');
 var once = require('once');
 
 var app = require('./lib');
@@ -16,6 +17,20 @@ var app = require('./lib');
 
 
 ///--- Globals
+
+var BUCKET = {
+    name: 'wrasse',
+    schema: {
+        index: {
+            worker: {
+                type: 'string'
+            }
+        },
+        options: {
+            version: 1
+        }
+    }
+};
 
 var LOG = bunyan.createLogger({
     name: 'wrasse',
@@ -78,6 +93,7 @@ function configure() {
     assert.object(cfg.auth, 'config.auth');
     assert.object(cfg.manta, 'config.manta');
     assert.object(cfg.marlin, 'config.marlin');
+    assert.object(cfg.moray, 'config.moray');
     if (cfg.logLevel)
         LOG.level(cfg.logLevel);
 
@@ -93,10 +109,38 @@ function configure() {
     cfg.auth.log = LOG;
     cfg.manta.log = LOG;
     cfg.marlin.log = LOG;
+    cfg.moray.log = LOG;
 
     return (cfg);
 }
 
+
+function createMorayClient(opts, cb) {
+    cb = once(cb);
+
+    var client = moray.createClient(opts);
+
+    client.once('error', function (err) {
+        client.removeAllListeners('connect');
+        cb(err);
+    });
+
+    client.once('connect', function () {
+        client.removeAllListeners('error');
+        client.putBucket(BUCKET.name, BUCKET.schema, function (put_err) {
+            if (put_err) {
+                cb(put_err);
+                return;
+            }
+
+            client.on('error', function (err) {
+                LOG.error(err, 'unsolicited moray error');
+            });
+
+            cb(null, client);
+        });
+    });
+}
 
 function run(opts) {
     var ee = new EventEmitter();
@@ -139,36 +183,44 @@ function run(opts) {
     });
     assert.object(mantaClient, 'manta client');
 
-    app.createMahiClient(cfg.auth, function (mahi_err, mahi) {
-        assert.ifError(mahi_err);
+    createMorayClient(cfg.moray, function (moray_err, morayClient) {
+        assert.ifError(moray_err);
 
-        marlin.createClient(cfg.marlin, function (marlin_err, marlin) {
-            assert.ifError(marlin_err);
+        app.createMahiClient(cfg.auth, function (mahi_err, mahi) {
+            assert.ifError(mahi_err);
 
-            var opts = {
-                log: LOG,
-                mahi: mahi,
-                manta: mantaClient,
-                marlin: marlin,
-                pollInterval: cfg.pollInterval || 10000
-            };
-            var queue = libmanta.createQueue({
-                limit: 10,
-                worker: app.upload(opts)
-            });
+            var _cfg = cfg.marlin;
+            marlin.createClient(_cfg, function (marlin_err, marlinClient) {
+                assert.ifError(marlin_err);
 
-            queue.on('error', function (err) {
-                LOG.error(err, 'job upload failed');
-            });
+                var opts = {
+                    lingerTime: cfg.lingerTime || (4 * 60 * 60 * 1000), // 4hrs
+                    log: LOG,
+                    mahi: mahi,
+                    manta: mantaClient,
+                    marlin: marlinClient,
+                    moray: morayClient,
+                    pollInterval: cfg.pollInterval || 10000,
+                    takeoverTime: cfg.takeoverTime || 1800000
+                };
+                var queue = libmanta.createQueue({
+                    limit: 10,
+                    worker: app.upload(opts)
+                });
 
-            queue.once('end', function () {
-                mahi.close();
-                mantaClient.close();
-                marlin.close();
-            });
+                queue.on('error', function (err) {
+                    LOG.error(err, 'job upload failed');
+                });
 
-            run(opts).on('jobs', function (jobs) {
-                jobs.forEach(queue.push.bind(queue));
+                queue.once('end', function () {
+                    mahi.close();
+                    mantaClient.close();
+                    marlinClient.close();
+                });
+
+                run(opts).on('jobs', function (jobs) {
+                    jobs.forEach(queue.push.bind(queue));
+                });
             });
         });
     });

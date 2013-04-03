@@ -21,5 +21,10 @@
                 "retries": 120
             }
         }
-    }
+    },
+    "moray": {
+        "url": "tcp://2.moray.bh1.joyent.us:2020"
+    },
+    "lingerTime": 180000,
+    "takeoverTime": 30000
 }
