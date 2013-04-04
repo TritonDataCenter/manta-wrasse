@@ -22,9 +22,7 @@
             }
         }
     },
-    "moray": {
-        "url": "tcp://2.moray.bh1.joyent.us:2020"
-    },
-    "lingerTime": 180000,
-    "takeoverTime": 30000
+    "lingerTime": 60,
+    "takeoverTime": 30,
+    "pollInterval": 10
 }
