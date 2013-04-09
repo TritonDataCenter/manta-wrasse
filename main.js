@@ -19,7 +19,7 @@ var app = require('./lib');
 
 var LOG = bunyan.createLogger({
     name: 'wrasse',
-    level: process.env.LOG_LEVEL || 'info',
+    level: 'info',
     serializers: libmanta.bunyan.serializers
 });
 
@@ -78,6 +78,7 @@ function configure() {
     assert.object(cfg.auth, 'config.auth');
     assert.object(cfg.manta, 'config.manta');
     assert.object(cfg.marlin, 'config.marlin');
+
     if (cfg.logLevel)
         LOG.level(cfg.logLevel);
 
@@ -93,6 +94,17 @@ function configure() {
     cfg.auth.log = LOG;
     cfg.manta.log = LOG;
     cfg.marlin.log = LOG;
+
+    // XXX
+    // var l = bunyan.createLogger({
+    //     name: 'stub',
+    //     level: 'error',
+    //     serializers: bunyan.stdSerializers
+    // });
+
+    // cfg.auth.log = l;
+    // cfg.manta.log = l;
+    // cfg.marlin.log = l;
 
     return (cfg);
 }
@@ -148,7 +160,7 @@ function run(opts) {
     var cfg = configure();
 
     var mantaClient = manta.createClient({
-        log: LOG,
+        log: cfg.manta.log,
         sign: manta.privateKeySigner({
             key: fs.readFileSync(cfg.manta.key, 'utf8'),
             keyId: cfg.manta.keyId,
