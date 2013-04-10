@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE service_bundle SYSTEM "/usr/share/lib/xml/dtd/service_bundle.dtd.1">
 <!-- Copyright (c) 2012, Joyent, Inc. All rights reserved. -->
-<service_bundle type="manifest" name="jobpusher">
-    <service name="smartdc/application/jobpusher" type="service" version="1">
+<service_bundle type="manifest" name="jobpuller">
+    <service name="smartdc/application/jobpuller" type="service" version="1">
 
 	<create_default_instance enabled="false" />
 	<single_instance />
