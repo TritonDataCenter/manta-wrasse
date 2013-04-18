@@ -95,17 +95,6 @@ function configure() {
     cfg.manta.log = LOG;
     cfg.marlin.log = LOG;
 
-    // XXX
-    // var l = bunyan.createLogger({
-    //     name: 'stub',
-    //     level: 'error',
-    //     serializers: bunyan.stdSerializers
-    // });
-
-    // cfg.auth.log = l;
-    // cfg.manta.log = l;
-    // cfg.marlin.log = l;
-
     return (cfg);
 }
 
@@ -166,6 +155,7 @@ function run(opts) {
             keyId: cfg.manta.keyId,
             user: cfg.manta.user
         }),
+        rejectUnauthorized: false,
         user: cfg.manta.user,
         url: cfg.manta.url
     });
