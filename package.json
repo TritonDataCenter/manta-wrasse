@@ -6,7 +6,7 @@
     "private": true,
     "dependencies": {
         "assert-plus": "0.1.2",
-        "bunyan": "0.21.1",
+        "bunyan": "0.21.2",
         "dashdash": "1.0.1",
         "libmanta": "git+ssh://git@git.joyent.com:node-libmanta.git#master",
         "manta": "git+ssh://git@github.com:joyent/node-manta.git#master",
