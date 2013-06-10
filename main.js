@@ -169,6 +169,8 @@ function run(opts) {
             assert.ifError(marlin_err);
 
             var opts = {
+                deleteLimit: cfg.deleteLimit,
+                deleteTimeout: cfg.deleteTimeout,
                 lingerTime: cfg.lingerTime || 86400, // 24 hrs
                 log: LOG,
                 mahi: mahi,
