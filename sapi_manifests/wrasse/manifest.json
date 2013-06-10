@@ -1,0 +1,6 @@
+{
+    "name": "wrasse",
+    "path": "/opt/smartdc/wrasse/etc/config.json",
+	"post_cmd": "svcadm refresh wrasse",
+	"master": true
+}
