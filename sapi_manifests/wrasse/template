@@ -22,7 +22,7 @@
                         }
                 }
         },
-        "logLevel": "info",
+        "logLevel": "debug",
         "lingerTime": 86400,
         "takeoverTime": 30,
         "pollInterval": 2,

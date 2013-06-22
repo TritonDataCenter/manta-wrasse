@@ -1,6 +1,6 @@
 {
     "auth": {
-        "host": "auth.bh1.joyent.us",
+        "host": "authcache.bh1.joyent.us",
         "port": 6379,
         "options": {
             "enable_offline_queue": false
@@ -22,7 +22,8 @@
             }
         }
     },
-    "lingerTime": 60,
+    "lingerTime": 3600,
     "takeoverTime": 30,
-    "pollInterval": 10
+    "pollInterval": 10,
+    "deleteLimit": 2000
 }
