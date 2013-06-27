@@ -55,7 +55,7 @@ NPM_ENV          	 = MAKE_OVERRIDES="CTFCONVERT=/bin/true CTFMERGE=/bin/true"
 # Repo-specific targets
 #
 .PHONY: all
-all: $(SMF_MANIFESTS) | $(NPM_EXEC) $(REPO_DEPS)
+all: $(SMF_MANIFESTS) | $(NPM_EXEC) $(REPO_DEPS) scripts
 	$(NPM) install
 
 CLEAN_FILES += node_modules
@@ -69,11 +69,13 @@ test: $(NODEUNIT)
 	@echo "Building $(RELEASE_TARBALL)"
 release: all docs $(SMF_MANIFESTS)
 	@mkdir -p $(TMPDIR)/root/opt/smartdc/$(NAME)
+	@mkdir -p $(TMPDIR)/root/opt/smartdc/boot
 	@mkdir -p $(TMPDIR)/site
 	@touch $(TMPDIR)/site/.do-not-delete-me
 	@mkdir -p $(TMPDIR)/root
 	@mkdir -p $(TMPDIR)/root/opt/smartdc/$(NAME)/etc
 	cp -r   $(ROOT)/build \
+		$(ROOT)/boot \
 		$(ROOT)/main.js \
 		$(ROOT)/lib \
 		$(ROOT)/node_modules \
@@ -82,6 +84,11 @@ release: all docs $(SMF_MANIFESTS)
 		$(ROOT)/smf \
 		$(ROOT)/test \
 		$(TMPDIR)/root/opt/smartdc/$(NAME)
+	mv $(TMPDIR)/root/opt/smartdc/$(NAME)/build/scripts \
+	    $(TMPDIR)/root/opt/smartdc/$(NAME)/boot
+	ln -s /opt/smartdc/$(NAME)/boot/configure.sh \
+	    $(TMPDIR)/root/opt/smartdc/boot/configure.sh
+	chmod 755 $(TMPDIR)/root/opt/smartdc/$(NAME)/boot/configure.sh
 	(cd $(TMPDIR) && $(TAR) -jcf $(ROOT)/$(RELEASE_TARBALL) root site)
 	@rm -rf $(TMPDIR)
 
