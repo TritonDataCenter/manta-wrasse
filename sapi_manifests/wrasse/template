@@ -22,10 +22,10 @@
                         }
                 }
         },
-        "logLevel": "debug",
+        "logLevel": "info",
         "lingerTime": 86400,
         "takeoverTime": 30,
         "pollInterval": 2,
-	"deleteTimeout": 300000,
-	"deleteLimit": 500
+        "deleteTimeout": 300000,
+        "deleteLimit": 500
 }

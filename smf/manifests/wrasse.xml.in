@@ -42,6 +42,7 @@
                     <envvar name="LD_PRELOAD_32"
                             value="/usr/lib/extendedFILE.so.1" />
                     <envvar name="NODE_NDEBUG" value="1" />
+                    <envvar name="MANTA_NO_CHECK_PATH" value="1" />
 		</method_environment>
             </method_context>
 	</exec_method>

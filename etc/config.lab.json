@@ -22,7 +22,7 @@
             }
         }
     },
-    "lingerTime": 3600,
+    "lingerTime": 120,
     "takeoverTime": 30,
     "pollInterval": 10,
     "deleteLimit": 2000
