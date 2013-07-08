@@ -13,7 +13,7 @@
         "bunyan": "0.21.3",
         "dashdash": "1.0.1",
         "libmanta": "git+ssh://git@git.joyent.com:node-libmanta.git#master",
-        "manta": "1.0.0",
+        "manta": "git://github.com/joyent/node-manta.git#master",
         "marlin": "git+ssh://git@git.joyent.com:marlin.git#master",
         "mkdirp": "0.3.5",
         "moray": "git+ssh://git@git.joyent.com:node-moray.git#master",
