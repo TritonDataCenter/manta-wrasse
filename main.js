@@ -6,6 +6,7 @@ var fs = require('fs');
 var assert = require('assert-plus');
 var bunyan = require('bunyan');
 var dashdash = require('dashdash');
+var http = require('http');
 var libmanta = require('libmanta');
 var manta = require('manta');
 var marlin = require('marlin');
@@ -95,6 +96,8 @@ function configure() {
     cfg.manta.log = LOG;
     cfg.marlin.log = LOG;
 
+    cfg.pingPort = cfg.pingPort || 80;
+
     return (cfg);
 }
 
@@ -168,6 +171,11 @@ function run(opts) {
         marlin.createClient(_cfg, function (marlin_err, marlinClient) {
             assert.ifError(marlin_err);
 
+            var ps = http.createServer(function (req, res) {
+                res.end('Ok.');
+            });
+            ps.listen(cfg.pingPort);
+
             var opts = {
                 deleteLimit: cfg.deleteLimit,
                 deleteTimeout: cfg.deleteTimeout,
@@ -192,6 +200,7 @@ function run(opts) {
                 mahi.close();
                 mantaClient.close();
                 marlinClient.close();
+                ps.close();
             });
 
             run(opts).on('jobs', function (jobs) {
