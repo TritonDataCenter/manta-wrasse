@@ -64,6 +64,10 @@ CLEAN_FILES += node_modules
 test: $(NODEUNIT)
 	$(NODEUNIT) test/*.test.js
 
+.PHONY: scripts
+scripts: deps/manta-scripts/.git
+	mkdir -p $(BUILD)/scripts
+	cp deps/manta-scripts/*.sh $(BUILD)/scripts
 
 .PHONY: release
 	@echo "Building $(RELEASE_TARBALL)"
