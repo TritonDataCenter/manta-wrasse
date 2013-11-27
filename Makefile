@@ -46,7 +46,7 @@ include ./tools/mk/Makefile.smf.defs
 
 RELEASE_TARBALL         := $(NAME)-pkg-$(STAMP).tar.bz2
 ROOT                    := $(shell pwd)
-TMPDIR                  := /tmp/$(STAMP)
+RELSTAGEDIR                  := /tmp/$(STAMP)
 
 # See marlin.git Makefile.
 NPM_ENV          	 = MAKE_OVERRIDES="CTFCONVERT=/bin/true CTFMERGE=/bin/true"
@@ -72,12 +72,12 @@ scripts: deps/manta-scripts/.git
 .PHONY: release
 	@echo "Building $(RELEASE_TARBALL)"
 release: all docs $(SMF_MANIFESTS)
-	@mkdir -p $(TMPDIR)/root/opt/smartdc/$(NAME)
-	@mkdir -p $(TMPDIR)/root/opt/smartdc/boot
-	@mkdir -p $(TMPDIR)/site
-	@touch $(TMPDIR)/site/.do-not-delete-me
-	@mkdir -p $(TMPDIR)/root
-	@mkdir -p $(TMPDIR)/root/opt/smartdc/$(NAME)/etc
+	@mkdir -p $(RELSTAGEDIR)/root/opt/smartdc/$(NAME)
+	@mkdir -p $(RELSTAGEDIR)/root/opt/smartdc/boot
+	@mkdir -p $(RELSTAGEDIR)/site
+	@touch $(RELSTAGEDIR)/site/.do-not-delete-me
+	@mkdir -p $(RELSTAGEDIR)/root
+	@mkdir -p $(RELSTAGEDIR)/root/opt/smartdc/$(NAME)/etc
 	cp -r   $(ROOT)/build \
 		$(ROOT)/boot \
 		$(ROOT)/main.js \
@@ -87,14 +87,14 @@ release: all docs $(SMF_MANIFESTS)
 		$(ROOT)/sapi_manifests \
 		$(ROOT)/smf \
 		$(ROOT)/test \
-		$(TMPDIR)/root/opt/smartdc/$(NAME)
-	mv $(TMPDIR)/root/opt/smartdc/$(NAME)/build/scripts \
-	    $(TMPDIR)/root/opt/smartdc/$(NAME)/boot
+		$(RELSTAGEDIR)/root/opt/smartdc/$(NAME)
+	mv $(RELSTAGEDIR)/root/opt/smartdc/$(NAME)/build/scripts \
+	    $(RELSTAGEDIR)/root/opt/smartdc/$(NAME)/boot
 	ln -s /opt/smartdc/$(NAME)/boot/configure.sh \
-	    $(TMPDIR)/root/opt/smartdc/boot/configure.sh
-	chmod 755 $(TMPDIR)/root/opt/smartdc/$(NAME)/boot/configure.sh
-	(cd $(TMPDIR) && $(TAR) -jcf $(ROOT)/$(RELEASE_TARBALL) root site)
-	@rm -rf $(TMPDIR)
+	    $(RELSTAGEDIR)/root/opt/smartdc/boot/configure.sh
+	chmod 755 $(RELSTAGEDIR)/root/opt/smartdc/$(NAME)/boot/configure.sh
+	(cd $(RELSTAGEDIR) && $(TAR) -jcf $(ROOT)/$(RELEASE_TARBALL) root site)
+	@rm -rf $(RELSTAGEDIR)
 
 .PHONY: publish
 publish: release
