@@ -24,7 +24,7 @@
         },
         "logLevel": "info",
         "lingerTime": 86400,
-        "takeoverTime": 30,
+        "takeoverTime": 90,
         "pollInterval": 2,
         "deleteTimeout": 300000,
         "deleteLimit": 500
