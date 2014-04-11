@@ -1,0 +1,30 @@
+{
+    "auth": {
+        "host": "authcache.coal.joyent.us",
+        "port": 6379,
+        "options": {
+            "enable_offline_queue": false
+        }
+    },
+    "logLevel": "info",
+    "manta": {
+        "url": "https://manta.coal.joyent.us",
+        "user": "mcavage",
+        "keyId": "7b:c0:5c:d6:9e:11:0c:76:04:4b:03:c9:11:f2:72:7f",
+        "key": "/home/mcavage/.ssh/id_rsa"
+    },
+    "marlin": {
+        "moray": {
+            "url": "tcp://1.moray.coal.joyent.us:2020",
+            "reconnect": {
+                "maxTimeout": 30000,
+                "retries": 120
+            }
+        }
+    },
+    "lingerTime": 120,
+    "takeoverTime": 15,
+    "pollInterval": 2,
+    "deleteLimit": 2000,
+    "pingPort": 1080
+}
