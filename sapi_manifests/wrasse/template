@@ -1,10 +1,10 @@
 {
         "auth": {
-                "host": "{{AUTH_SERVICE}}",
-                "port": 6379,
-                "options": {
-                        "enable_offline_queue": false
-                }
+                "url": "http://{{AUTH_SERVICE}}",
+                "maxAuthCacheSize": 1000,
+                "maxAuthCacheAgeMs": 300,
+                "maxTranslationCacheSize": 1000,
+                "maxTranslationCacheAgeMs": 300
         },
         "manta": {
                 "url": "{{MANTA_URL}}",

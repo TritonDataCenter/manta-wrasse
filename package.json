@@ -14,6 +14,7 @@
         "dashdash": "1.4.0",
         "libmanta": "git+ssh://git@git.joyent.com:node-libmanta.git#master",
         "manta": "git://github.com/joyent/node-manta.git#master",
+        "mahi": "git+ssh://git@git.joyent.com:node-mahi.git#master",
         "marlin": "git+ssh://git@git.joyent.com:marlin.git#master",
         "mkdirp": "0.3.5",
         "moray": "git+ssh://git@git.joyent.com:node-moray.git#master",
