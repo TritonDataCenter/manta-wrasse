@@ -171,6 +171,10 @@ function run(opts) {
         marlin.createClient(_cfg, function (marlin_err, marlinClient) {
             assert.ifError(marlin_err);
 
+            marlinClient.on('error', function (err) {
+                LOG.error(err, 'marlin client error');
+            });
+
             var ps = http.createServer(function (req, res) {
                 res.end('Ok.');
             });
