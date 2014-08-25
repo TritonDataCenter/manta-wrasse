@@ -28,5 +28,6 @@
     },
     "scripts": {
         "test": "nodeunit test/*.test.js"
-    }
+    },
+    "license": "MPL-2.0"
 }
