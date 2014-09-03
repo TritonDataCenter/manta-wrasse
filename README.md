@@ -23,9 +23,10 @@ for all of time.
 
 Wrasse runs as a single node process in a zone, and can/should be run
 redundantly (meaning multiple zone instances).  The wrasse process polls the
-marlin jobs table, looking for jobs that are in `state=done` and are
-_unassigned_.  _Unassigned_ means that no wrasse process has rewritten the job
-record back indicating that it is working on the job.
+[marlin](http://github.com/joyent/manta-marlin) jobs table, looking for jobs
+that are in `state=done` and are _unassigned_.  _Unassigned_ means that no
+wrasse process has rewritten the job record back indicating that it is working
+on the job.
 
 Once an _unassigned_ job is discovered, wrasse immediately tries to "claim" the
 job, by recording that `$self` "owns" the job (using moray etags), and if
@@ -83,15 +84,15 @@ beginning and goes through the logic listed above.
 # Configuration
 
 Configuration of wrasse involves telling it where
-[https://github.com/joyent/mahi](mahi) and the
-[https://github.com/joyent/moray](moray) that contains the `marlin_jobs_v2`
+[mahi](https://github.com/joyent/mahi) and the
+[moray](https://github.com/joyent/moray) that contains the `marlin_jobs_v2`
 bucket are, along with the requisite manta information for
-[https://github.com/joyent/node-manta](node-manta).
+[node-manta](https://github.com/joyent/node-manta).
 
 In addition, some tunables affecting poll/takeover time, how many items to
 delete in a batch, etc., can be set.
 
-```javascriot
+```javascript
 {
     "auth": {
         "host": "authcache.coal.joyent.us",
