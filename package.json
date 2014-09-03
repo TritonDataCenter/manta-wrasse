@@ -12,7 +12,7 @@
         "assert-plus": "0.1.5",
         "bunyan": "0.22.1",
         "dashdash": "1.4.0",
-        "libmanta": "git+ssh://git@gitub.com:joyent/node-libmanta.git#master",
+        "libmanta": "git+ssh://git@github.com:joyent/node-libmanta.git#master",
         "manta": "git://github.com/joyent/node-manta.git#master",
         "mahi": "git+ssh://git@github.com:joyent/node-mahi.git#master",
         "marlin": "git+ssh://git@github.com:joyent/manta-marlin.git#master",
