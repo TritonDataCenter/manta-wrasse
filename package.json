@@ -6,7 +6,7 @@
     "private": true,
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@git.joyent.com:wrasse.git"
+        "url": "git+ssh://git@github.com:joyent/manta-wrasse.git"
     },
     "dependencies": {
         "assert-plus": "0.1.5",
