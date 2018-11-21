@@ -5,7 +5,7 @@
 #
 
 #
-# Copyright (c) 2014, Joyent, Inc.
+# Copyright (c) 2018, Joyent, Inc.
 #
 
 #
@@ -67,10 +67,6 @@ all: $(SMF_MANIFESTS) | $(NPM_EXEC) $(REPO_DEPS) scripts
 	$(NPM) install
 
 CLEAN_FILES += node_modules
-
-.PHONY: test
-test: $(NODEUNIT)
-	$(NODEUNIT) test/*.test.js
 
 .PHONY: scripts
 scripts: deps/manta-scripts/.git

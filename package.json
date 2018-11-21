@@ -23,9 +23,6 @@
         "rimraf": "2.2.6",
         "vasync": "1.4.3"
     },
-    "devDependencies": {
-        "nodeunit": "0.8.6"
-    },
     "scripts": {
         "test": "nodeunit test/*.test.js"
     },
