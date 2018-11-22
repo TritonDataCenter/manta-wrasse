@@ -30,7 +30,7 @@ NODEUNIT	:= ./node_modules/.bin/nodeunit
 #
 # Files
 #
-JS_FILES	:= $(shell ls *.js) $(shell find lib test -name '*.js')
+JS_FILES	:= $(shell ls *.js) $(shell find lib -name '*.js')
 JSL_CONF_NODE	 = tools/jsl.node.conf
 JSL_FILES_NODE   = $(JS_FILES)
 JSSTYLE_FILES	 = $(JS_FILES)
@@ -90,7 +90,6 @@ release: all docs $(SMF_MANIFESTS)
 		$(ROOT)/package.json \
 		$(ROOT)/sapi_manifests \
 		$(ROOT)/smf \
-		$(ROOT)/test \
 		$(RELSTAGEDIR)/root/opt/smartdc/$(NAME)
 	mv $(RELSTAGEDIR)/root/opt/smartdc/$(NAME)/build/scripts \
 	    $(RELSTAGEDIR)/root/opt/smartdc/$(NAME)/boot
