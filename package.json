@@ -8,11 +8,15 @@
         "type": "git",
         "url": "git+ssh://git@github.com:joyent/manta-wrasse.git"
     },
+    "// lru-cache": "attempting to pin version while satisfying transitive deps, because lru-cache@4.1.4 includes yallist@3 which breaks node --abort-on-uncaught-exception with node <v4",
+    "// kang": "elevate the libmanta->moray->fast->kang dep, so the top-level lru-cache@4.1.3 can be used by kang's restify dep, without being blocked by libmanta's lru-cache@2 dep",
     "dependencies": {
         "assert-plus": "0.1.5",
         "bunyan": "0.22.1",
         "dashdash": "1.4.0",
+        "kang": "1.2.0",
         "libmanta": "git+ssh://git@github.com:joyent/node-libmanta.git#master",
+        "lru-cache": "4.1.3",
         "manta": "git://github.com/joyent/node-manta.git#master",
         "mahi": "git+ssh://git@github.com:joyent/node-mahi.git#master",
         "marlin": "git+ssh://git@github.com:joyent/manta-marlin.git#master",
