@@ -5,7 +5,7 @@
 #
 
 #
-# Copyright (c) 2019, Joyent, Inc.
+# Copyright 2019 Joyent, Inc.
 #
 
 #
@@ -64,7 +64,7 @@ ROOT                    := $(shell pwd)
 RELSTAGEDIR                  := /tmp/$(NAME)-$(STAMP)
 
 BASE_IMAGE_UUID = fd2cc906-8938-11e3-beab-4359c665ac99
-BUILDIMAGE_NAME = manta-jobpuller
+BUILDIMAGE_NAME = mantav1-jobpuller
 BUILDIMAGE_DESC	= Manta Job Puller
 BUILDIMAGE_PKGSRC = zookeeper-client-3.4.3
 AGENTS		= amon config registrar
