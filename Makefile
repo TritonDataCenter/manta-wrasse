@@ -5,7 +5,7 @@
 #
 
 #
-# Copyright 2019 Joyent, Inc.
+# Copyright 2020 Joyent, Inc.
 #
 
 #
@@ -68,6 +68,9 @@ BUILDIMAGE_NAME = mantav1-jobpuller
 BUILDIMAGE_DESC	= Manta Job Puller
 BUILDIMAGE_PKGSRC = zookeeper-client-3.4.3
 AGENTS		= amon config registrar
+
+# For mantav1, specify the branch to compare copyrights with
+ENGBLD_CHECK_COPYRIGHT_ARGS = -b mantav1
 
 # See marlin.git Makefile.
 NPM_ENV          	 = MAKE_OVERRIDES="CTFCONVERT=/bin/true CTFMERGE=/bin/true"
